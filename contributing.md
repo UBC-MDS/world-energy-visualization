@@ -70,5 +70,5 @@ Before you submit a pull request, check that it meets these guidelines:
 
 ## Code of Conduct
 
-Please note that the `pylyrics` project is released with a 
+Please note that the `world-energy-visualization` project is released with a 
 Code of Conduct. By contributing to this project you agree to abide by its terms.
