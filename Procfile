@@ -1,1 +1,1 @@
-web: gunicorn app:server
+web: gunicorn scr.app:server
