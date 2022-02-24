@@ -18,104 +18,28 @@ df_continents = df_all[df_all['Code'].isna()]
 list_of_continents = df_continents['Entity'].unique()
 list_of_countries = df_countries['Entity'].unique()
 
-
-#==============================================================================
-#                            Sidebar for Tab2
-#==============================================================================
-   
-SIDEBAR2_STYLE = {
-    "position": "fixed",
-    "top": 0,
-    "left": 0,
-    "bottom": 0,
-    "width": "16rem",
-    "padding": "2rem 1rem",
-    "background-color": "#f8f9fa",
-}
-
-
-sidebar2 = dbc.Col([
-        html.H1("Historical Trends"),
-        html.Hr(),
-        
-        html.H3(
-            "Country",
-            style={"width": "50%", "display": "inline-block"},
-        ),
-        html.Hr(),
-        
-        dbc.Col(
-            dcc.Dropdown(
-                id="tab2-country-dropdown",
-                options=[{"label": country, "value": country} for country in list_of_countries],
-                value=["Canada", "France"],
-            ),
-            width=12,
-            style={
-                "padding": "10px 10px 10px 0px",
-            },
-        ),
-        html.Hr(),
-        
-        html.H3(
-            "Region",
-            style={"width": "50%", "display": "inline-block"},
-        ),
-        html.Hr(),
-        dbc.Col(
-            dcc.Dropdown(
-                id="tab2-region-dropdown",
-                options=[{"label": region, "value": region} for region in list_of_continents],
-                multi=True,
-                value=["North America", "Europe"],
-            ),
-            width=12,
-            style={
-                "padding": "10px 10px 10px 0px",
-            },
-        ),
-        html.Hr(),
-        
-        html.H3(
-            "World",
-            style={"width": "50%", "display": "inline-block"},
-        ),
-        dbc.Checklist(
-            options=[
-                {"label": "Option 1", "value": 1},
-            ],
-            value=[1],
-            id="tab2-world-toggle",
-            switch=True,
-        ),
-    ],
-    style=SIDEBAR2_STYLE,
-)
-
-
 #==============================================================================
 #                            Lineplots
 #==============================================================================
 
 tab2_lineplots = dbc.Col([
-        sidebar2, 
-        html.H1("Fossil"),
+        html.H4("Fossil"),
         dcc.Graph(id="tab2-lineplot-fossil"),
-        html.Hr(),
+        html.Br(),
         
-        html.H1("Nuclear"),
+        html.H4("Nuclear"),
         dcc.Graph(id="tab2-lineplot-nuclear"),
-        html.Hr(),
+        html.Br(),
         
-        html.H1("Renewable"),
+        html.H4("Renewable"),
         dcc.Graph(id="tab2-lineplot-renewable"),
-        html.Hr(),
+        html.Br(),
         
         dcc.RangeSlider(1950, 2022, 5,
                    value=1980,
-                   id="tab2-years-rangeslider"
-    ),
-])
+                   id="tab2-years-rangeslider"),
+        
+    ])
 
 
 @callback(
@@ -163,16 +87,3 @@ def lineplot_renewable(years):
     return fig
     
     
-#==============================================================================
-#                            Tab2 Layout
-#==============================================================================    
-
-tab2_layout = dbc.Container([
-        dbc.Row([
-            sidebar2,
-            tab2_lineplots
-        ]),   
-    ],
-    fluid=True,
-    style={"width": "80%"},
-)

@@ -35,19 +35,19 @@ tab1_plots = html.Div([
                value=1980,
                id="tab1-year-slider"
     ),
-    html.H1("Top N countries"),
-    html.Hr(),
+    html.H4("Top N countries"),
+    html.Br(),
     dcc.Graph(id="tab1-barchart"),
     dbc.Row([
         dbc.Col([
-            html.H1("Number of countries"),
-            html.Hr(),
+            html.H5("Number of countries"),
+            html.Br(),
             dbc.Input(id="tab1-input-topN", placeholder="10", type="number"),     
         ]),
         
         dbc.Col([
-            html.H1("Ranking type"),
-            html.Hr(),
+            html.H5("Ranking type"),
+            html.Br(),
             dcc.RadioItems(["Top", "Bottom"], "Top", inline=True)   
         ]),  
     ])

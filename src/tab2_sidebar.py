@@ -6,8 +6,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
-
-from tab1_mapview import tab1_plots
+from tab2_trends import tab2_lineplots
 
 
 df_all = pd.read_csv("../data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
@@ -20,35 +19,38 @@ df_continents = df_all[df_all['Code'].isna()]
 list_of_continents = df_continents['Entity'].unique()
 list_of_countries = df_countries['Entity'].unique()
 
-#==============================================================================
-#                            SideBar1
-#==============================================================================  
 
-SIDEBAR1_STYLE = {
+#==============================================================================
+#                            Sidebar for Tab2
+#==============================================================================
+   
+SIDEBAR2_STYLE = {
     "position": "fixed",
     "top": 0,
     "left": 0,
     "bottom": 0,
-    "width": "18rem",
+    "width": "16rem",
     "padding": "2rem 1rem",
     "background-image": "url(/assets/wind-energy.jpg)"
-    # "background-color": "#98FB98",
+    # "background-color": "#f8f9fa",
 }
 
 
-sidebar1 = dbc.Col([
-        html.H3("World Energy Visualisation"),
+sidebar2 = dbc.Col([
+        html.H3("Historical Trends"),
         html.Br(),
+        
         html.H5(
-            "Energy type",
+            "Country",
             style={"width": "50%", "display": "inline-block"},
         ),
+        html.Br(),
         
         dbc.Col(
             dcc.Dropdown(
-                id="tab1-energy-type-dropdown",
-                options=[{"label": energy_type, "value": energy_type} for energy_type in ["Fossil", "Nuclear", "Renewable"]],
-                value=["Fossil"],
+                id="tab2-country-dropdown",
+                options=[{"label": country, "value": country} for country in list_of_countries],
+                value=["Canada", "France"],
             ),
             width=12,
             style={
@@ -61,10 +63,10 @@ sidebar1 = dbc.Col([
             "Region",
             style={"width": "50%", "display": "inline-block"},
         ),
-        
+        html.Br(),
         dbc.Col(
             dcc.Dropdown(
-                id="tab1-region-dropdown",
+                id="tab2-region-dropdown",
                 options=[{"label": region, "value": region} for region in list_of_continents],
                 multi=True,
                 value=["North America", "Europe"],
@@ -77,27 +79,29 @@ sidebar1 = dbc.Col([
         html.Br(),
         
         html.H5(
-            "Data sources",
+            "World",
             style={"width": "50%", "display": "inline-block"},
         ),
-        dbc.Col(
-            html.P(
-                """ 
-                Datasets for visualization of energy trends were downloaded from https://www.kaggle.com/donjoeml/energy-consumption-and-generation-in-the-globe
-                """,
-            ),
+        dbc.Checklist(
+            options=[
+                {"label": "", "value": 1},
+            ],
+            value=[1],
+            id="tab2-world-toggle",
+            switch=True,
         ),
     ],
-    style=SIDEBAR1_STYLE,
+    style=SIDEBAR2_STYLE,
 )
 
+
 #==============================================================================
-#                            Tab1 Layout
+#                            Tab2 Layout
 #==============================================================================  
-tab1_layout = dbc.Container([
+tab2_layout = dbc.Container([
         dbc.Row([
-            sidebar1,
-            tab1_plots
+            sidebar2,
+            tab2_lineplots
         ]),   
     ],
     fluid=True,
