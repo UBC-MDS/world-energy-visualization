@@ -24,9 +24,9 @@ list_of_continents = df_continents['Entity'].unique()
 list_of_countries = df_countries['Entity'].unique()
 
 #==============================================================================
-#                            World Map
-#==============================================================================
-
+#                            Layout for map and barchart 
+#==============================================================================       
+    
 tab1_plots = html.Div([
     dcc.Graph(id="tab1-map"),
     dcc.Slider(1950, 
@@ -53,6 +53,10 @@ tab1_plots = html.Div([
     ])
 ])
 
+
+#==============================================================================
+#                            World Map
+#==============================================================================
 
 @callback(
     Output("map", "figure"), 
@@ -82,3 +86,5 @@ def display_barchart(energy_type, year):
     fig = "Barchart with top 10 countries"
     
     return fig
+
+
