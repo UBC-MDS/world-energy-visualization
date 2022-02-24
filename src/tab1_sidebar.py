@@ -91,15 +91,3 @@ sidebar1 = dbc.Col([
     style=SIDEBAR1_STYLE,
 )
 
-#==============================================================================
-#                            Tab1 Layout
-#==============================================================================  
-tab1_layout = dbc.Container([
-        dbc.Row([
-            sidebar1,
-            tab1_plots
-        ]),   
-    ],
-    fluid=True,
-    style={"width": "80%"},
-)

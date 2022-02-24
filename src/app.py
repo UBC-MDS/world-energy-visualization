@@ -20,27 +20,35 @@ server = app.server
 
 
 app.layout = dbc.Container([
-                dbc.Col([
-                    dbc.Tabs([
-                        dbc.Tab(
-                            tab1_layout,
-                            label="Map view",
-                            tab_id="tab1_mapview",
-                        ),
-                        dbc.Tab(
-                            tab2_layout,
-                            label="Trends",
-                            tab_id="tab2_trends",
-                        ),
-                    ],
-                    id="tabs",
-                    active_tab="tab1_mapview",
-                    )
-                ]),
+                dbc.Row([
+                    dbc.Col([
+                        sidebar1
+                    ]),
+                    
+                    dbc.Col([
+                        dbc.Tabs([
+                            dbc.Tab(
+                                tab1_plots,
+                                label="Map view",
+                                tab_id="tab1_mapview",
+                            ),
+                            dbc.Tab(
+                                tab2_layout,
+                                label="Trends",
+                                tab_id="tab2_trends",
+                            ),
+                        ],
+                        id="tabs",
+                        active_tab="tab1_mapview",
+                        )
+                    ]),
+
+                ])
+ 
             ],
             fluid=True,
             style={"width": "80%",},
-        )
+            )
 
 
 if __name__ == '__main__':
