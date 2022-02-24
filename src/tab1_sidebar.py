@@ -7,8 +7,6 @@ import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
 
-from tab1_mapview import tab1_plots
-
 
 df_all = pd.read_csv("../data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
 
@@ -81,11 +79,9 @@ sidebar1 = dbc.Col([
             style={"width": "50%", "display": "inline-block"},
         ),
         dbc.Col(
-            html.P(
-                """ 
-                Datasets for visualization of energy trends were downloaded from https://www.kaggle.com/donjoeml/energy-consumption-and-generation-in-the-globe
-                """,
-            ),
+            dcc.Markdown('''
+                Datasets for visualization of energy trends were downloaded from [here](https://www.kaggle.com/donjoeml/energy-consumption-and-generation-in-the-globe)
+            '''),
         ),
     ],
     style=SIDEBAR1_STYLE,
