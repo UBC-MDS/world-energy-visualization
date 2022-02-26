@@ -82,7 +82,7 @@ def display_map(energy_type, year):
 
     fig.update_layout(
             title={
-            'text' : "Global " + str(energy_type) + " Energy Distribution in " + str(year),
+            'text' : "Global " + str(energy_type) + " Energy Consumption in " + str(year),
             'x':0.5,
             'xanchor': 'center'
         })
