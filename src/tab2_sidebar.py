@@ -8,7 +8,7 @@ import plotly.io as pio
 import plotly.graph_objects as go
 
 from tab2_trends import tab2_lineplots
-
+#from app import SIDEBAR_STYLE
 
 df_all = pd.read_csv("../data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
 
@@ -36,6 +36,16 @@ SIDEBAR2_STYLE = {
     # "background-color": "#f8f9fa",
 }
 
+SIDEBAR_STYLE = {
+    "position": "fixed",
+    "top": 0,
+    "left": 0,
+    "bottom": 0,
+    #"width": "18rem",
+    "padding": "2rem 1rem",
+    "background-image": "url(/assets/wind-energy.jpg)"
+    # "background-color": "#98FB98",
+}
 
 sidebar2 = dbc.Col([
         html.H3("Historical Trends"),
@@ -92,7 +102,8 @@ sidebar2 = dbc.Col([
             switch=True,
         ),
     ],
-    style=SIDEBAR2_STYLE,
+    md=2,
+    style=SIDEBAR_STYLE,
 )
 
 

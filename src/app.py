@@ -16,37 +16,43 @@ app = dash.Dash(__name__,
                 external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
+TABS_STYLE = {
+    "position": "fixed",
+    "top": 0,
+    "right": 20,
+    "bottom": 0,
+    "width": "80%",
+    "padding": "2rem 1rem",
+}
 
 app.layout = dbc.Container([
-                dbc.Row([
-                    dbc.Col([
-                        sidebar1
-                    ]),
-                    
-                    dbc.Col([
-                        dbc.Tabs([
-                            dbc.Tab(
-                                tab1_plots,
-                                label="Map view",
-                                tab_id="tab1_mapview",
-                            ),
-                            dbc.Tab(
-                                tab2_layout,
-                                label="Trends",
-                                tab_id="tab2_trends",
-                            ),
-                        ],
-                        id="tabs",
-                        active_tab="tab1_mapview",
-                        )
-                    ]),
+                    dbc.Row([
+                        sidebar1,
+                            dbc.Col([
+                                dbc.Tabs([
+                                    dbc.Tab(
+                                        tab1_plots,
+                                        label="Map view",
+                                        tab_id="tab1_mapview",
+                                    ),
+                                    dbc.Tab(
+                                        tab2_layout,
+                                        label="Trends",
+                                        tab_id="tab2_trends",
+                                    ),
+                                ],
+                                id="tabs",
+                                active_tab="tab1_mapview",
+                                )
+                            ],
+                            md=10,
+                            style=TABS_STYLE,
+                    ),
+])],
+fluid=True,
+style={"width": "80%",},
+)
 
-                ])
- 
-            ],
-            fluid=True,
-            style={"width": "80%",},
-            )
 
 
 if __name__ == '__main__':

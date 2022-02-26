@@ -16,6 +16,12 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
 
 df_all = pd.read_csv("../data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
 df_notna = df_all[df_all['Code'].notna()]
+df_notna = df_notna.rename(columns={"Fossil fuels (% sub energy)": "Fossil", 
+                         "Renewables (% sub energy)": "Renewables", 
+                         "Nuclear (% sub energy)": "Nuclear"}).melt(id_vars=['Entity', 'Code', 'Year'], 
+                                                                    value_vars=['Fossil',  "Renewables", "Nuclear"],
+                                                                    var_name="energy_type",
+                                                                    value_name="percentage")
 df_countries = df_notna[df_notna['Code']!='OWID_WRL']
 df_world = df_notna[df_notna['Code']=='OWID_WRL']
 df_continents = df_all[df_all['Code'].isna()]
@@ -29,12 +35,7 @@ list_of_countries = df_countries['Entity'].unique()
     
 tab1_plots = html.Div([
     dcc.Graph(id="tab1-map"),
-    dcc.Slider(1950, 
-               2022, 
-               5,
-               value=1980,
-               id="tab1-year-slider"
-    ),
+    dcc.Slider(id='tab1-year-slider', min=1965, max=2015, step=10, value=2015),
     html.H4("Top N countries"),
     html.Br(),
     dcc.Graph(id="tab1-barchart"),
@@ -59,15 +60,28 @@ tab1_plots = html.Div([
 #==============================================================================
 
 @callback(
-    Output("map", "figure"), 
-    Input("tab1-energy-type-dropdown", "energy_type"),
-    Input("tab1-year-slider", "year"))
+    Output("tab1-map", "figure"), 
+    Input("tab1-energy-type-dropdown", "value"),
+    Input("tab1-year-slider", "value"))
+
 def display_map(energy_type, year):
     """
     Docs
     """
-    fig = "Figure of World map"
-    
+    df = df_notna.query("Year==@year & energy_type==@energy_type")
+    fig = px.choropleth(df, locations="Code",
+                    color="percentage", 
+                    hover_name="energy_type",
+                    color_continuous_scale=px.colors.sequential.Plasma,
+                    )
+
+    fig.update_layout(
+            title={
+            'text' : "Global " + str(energy_type) + " Energy Distribution",
+            'x':0.5,
+            'xanchor': 'center'
+        })
+
     return fig
     
     
@@ -77,8 +91,8 @@ def display_map(energy_type, year):
 
 @callback(
     Output("tab1-barchart", "figure"), 
-    Input("tab1-energy-type-dropdown", "energy_type"),
-    Input("tab1-year-slider", "year"))
+    Input("tab1-energy-type-dropdown", "value"),
+    Input("tab1-year-slider", "value"))
 def display_barchart(energy_type, year):
     """
     Docs
