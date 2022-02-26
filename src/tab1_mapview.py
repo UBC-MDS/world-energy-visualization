@@ -35,7 +35,12 @@ list_of_countries = df_countries['Entity'].unique()
     
 tab1_plots = html.Div([
     dcc.Graph(id="tab1-map"),
-    dcc.Slider(id='tab1-year-slider', min=1965, max=2015, step=10, value=2015),
+    dcc.Slider( id='tab1-year-slider', 
+                min=1965, 
+                max=2015, 
+                step=5, 
+                value=2015,
+                marks={i: str(i) for i in range(1965, 2015 + 1, 5)}),
     html.H4("Top N countries"),
     html.Br(),
     dcc.Graph(id="tab1-barchart"),
@@ -77,7 +82,7 @@ def display_map(energy_type, year):
 
     fig.update_layout(
             title={
-            'text' : "Global " + str(energy_type) + " Energy Distribution",
+            'text' : "Global " + str(energy_type) + " Energy Distribution in " + str(year),
             'x':0.5,
             'xanchor': 'center'
         })
