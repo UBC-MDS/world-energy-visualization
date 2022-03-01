@@ -23,37 +23,36 @@ TABS_STYLE = {
     "bottom": 0,
     "width": "80%",
     "padding": "2rem 1rem",
+    "overflow-y": "scroll"
 }
 
 app.layout = dbc.Container([
                     dbc.Row([
-                        dbc.Col([
-                            sidebar1
-                        ]),
-                        
-                        dbc.Col([
-                            dbc.Tabs([
-                                dbc.Tab(
-                                    tab1_plots,
-                                    label="Map view",
-                                    tab_id="tab1_mapview",
-                                ),
-                                dbc.Tab(
-                                    tab2_layout,
-                                    label="Trends",
-                                    tab_id="tab2_trends",
-                                ),
+                        sidebar1,
+                            dbc.Col([
+                                dbc.Tabs([
+                                    dbc.Tab(
+                                        tab1_plots,
+                                        label="Map view",
+                                        tab_id="tab1_mapview",
+                                    ),
+                                    dbc.Tab(
+                                        tab2_layout,
+                                        label="Trends",
+                                        tab_id="tab2_trends",
+                                    ),
+                                ],
+                                id="tabs",
+                                active_tab="tab1_mapview",
+                                )
                             ],
-                            id="tabs",
-                            active_tab="tab1_mapview",
-                            )
-                        ],
-                        # style=TABS_STYLE,
+                            md=10,
+                            style=TABS_STYLE,
                     ),
-            ])],
-                fluid=True,
-                style={"width": "80%",},
-            )
+])],
+fluid=True,
+style={"width": "80%",},
+)
 
 
 

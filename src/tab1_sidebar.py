@@ -25,7 +25,7 @@ SIDEBAR1_STYLE = {
     "top": 0,
     "left": 0,
     "bottom": 0,
-    "width": "18rem",
+    #"width": "18rem",
     "padding": "2rem 1rem",
     "background-image": "url(/assets/wind-energy.jpg)"
     # "background-color": "#98FB98",
@@ -82,7 +82,7 @@ sidebar1 = dbc.Col([
             '''),
         ),
     ],
-    # md=2,
+    md=2,
     style=SIDEBAR1_STYLE,
 )
 
