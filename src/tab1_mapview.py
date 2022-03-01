@@ -126,8 +126,9 @@ def display_map(energy_type, year):
     Output("tab1-barchart", "figure"),
     Input("tab1-energy-type-dropdown", "value"),
     Input("tab1-year-slider", "value"),
+    Input("tab1-input-topN", "value"),
 )
-def display_barchart(energy_type, year):
+def display_barchart(energy_type, year, topN):
     """
     Docs
     """
@@ -135,7 +136,7 @@ def display_barchart(energy_type, year):
     fig_bar = px.bar(
         df_notna.query("Year==@year & energy_type==@energy_type").sort_values(
             ["percentage"], ascending=False
-        )[:10],
+        )[:topN],
         x="percentage",
         y="Entity",
         color="percentage",
