@@ -29,7 +29,7 @@ SIDEBAR_STYLE = {
     "top": 0,
     "left": 0,
     "bottom": 0,
-    "width": "16rem",
+    #"width": "16rem",
     "padding": "2rem 1rem",
     "background-image": "url(/assets/wind-energy.jpg)"
 }
@@ -48,7 +48,7 @@ sidebar2 = dbc.Col([
             dcc.Dropdown(
                 id="tab2-country-dropdown",
                 options=[{"label": country, "value": country} for country in list_of_countries],
-                value=["Canada", "France"],
+                value="Canada",
             ),
             width=12,
             style={
@@ -67,7 +67,7 @@ sidebar2 = dbc.Col([
                 id="tab2-region-dropdown",
                 options=[{"label": region, "value": region} for region in list_of_continents],
                 multi=True,
-                value=["North America", "Europe"],
+                value=["North America"],
             ),
             width=12,
             style={
