@@ -7,9 +7,9 @@ import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
 
-from tab1_sidebar import sidebar1
-from tab1_mapview import tab1_plots
-from tab2_sidebar import tab2_layout
+from .tab1_sidebar import sidebar1
+from .tab1_mapview import tab1_plots
+from .tab2_sidebar import tab2_layout
 
 app = dash.Dash(__name__, 
                 title = "World Energy Visualization",
