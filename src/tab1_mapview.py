@@ -1,4 +1,4 @@
-from dash import Input, Output, callback, html, dcc
+from dash import Input, Output, callback, html, dcc, State
 import dash_bootstrap_components as dbc
 
 import pandas as pd
@@ -63,7 +63,7 @@ tab1_plots = dbc.Col(
                         html.H5("Number of countries"),
                         html.Br(),
                         dbc.Input(
-                            id="tab1-input-topN", placeholder="10", type="number"
+                            id="tab1-input-topN", value=10, type="number", debounce=True
                         ),
                     ]
                 ),
@@ -71,7 +71,12 @@ tab1_plots = dbc.Col(
                     [
                         html.H5("Ranking type"),
                         html.Br(),
-                        dcc.RadioItems(["Top", "Bottom"], "Top", inline=True),
+                        dcc.RadioItems(
+                            ["Top", "Bottom"],
+                            value="Top",
+                            id="tab1_top_bot",
+                            inline=True,
+                        ),
                     ]
                 ),
             ]
@@ -100,7 +105,8 @@ def display_map(energy_type, year):
         locations="Code",
         color="percentage",
         hover_name="energy_type",
-        color_continuous_scale=px.colors.sequential.Plasma,
+        color_continuous_scale=px.colors.sequential.YlGn,
+        range_color=[0, 100],
     )
 
     fig.update_layout(
@@ -127,24 +133,62 @@ def display_map(energy_type, year):
     Input("tab1-energy-type-dropdown", "value"),
     Input("tab1-year-slider", "value"),
     Input("tab1-input-topN", "value"),
+    Input("tab1_top_bot", "value"),
 )
-def display_barchart(energy_type, year, topN):
+def display_barchart(energy_type, year, topN, top_bot):
     """
     Docs
     """
 
+    if top_bot == "Top":
+        df_sorted = df_notna.query(
+            "Year==@year & energy_type==@energy_type"
+        ).sort_values(["percentage"], ascending=False)[:topN]
+
+    elif top_bot == "Bottom":
+        df_sorted = df_notna.query(
+            "Year==@year & energy_type==@energy_type"
+        ).sort_values(["percentage"], ascending=False)[-topN:]
+
     fig_bar = px.bar(
-        df_notna.query("Year==@year & energy_type==@energy_type").sort_values(
-            ["percentage"], ascending=False
-        )[:topN],
+        df_sorted,
         x="percentage",
         y="Entity",
         color="percentage",
         # title="Bar Graph",
-        # range_color=[0, 100],
-        # color_continuous_scale=px.colors.sequential.Plasma,
+        range_color=[0, 100],
+        color_continuous_scale=px.colors.sequential.YlGn,
         range_x=[0, 100],
     )
 
-    fig_bar.update_layout(yaxis={"categoryorder": "total ascending"})
+    if top_bot == "Top":
+        fig_bar.update_layout(
+            yaxis={"categoryorder": "total ascending"},
+            title={
+                "text": "Top "
+                + str(topN)
+                + " "
+                + str(energy_type)
+                + " Energy Consumers in "
+                + str(year),
+                "x": 0.5,
+                "xanchor": "center",
+            },
+        )
+
+    elif top_bot == "Bottom":
+        fig_bar.update_layout(
+            yaxis={"categoryorder": "total descending"},
+            title={
+                "text": "Bottom "
+                + str(topN)
+                + " "
+                + str(energy_type)
+                + " Energy Consumers in "
+                + str(year),
+                "x": 0.5,
+                "xanchor": "center",
+            },
+        )
+
     return fig_bar
