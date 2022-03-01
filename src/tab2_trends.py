@@ -19,10 +19,23 @@ list_of_continents = df_continents['Entity'].unique()
 list_of_countries = df_countries['Entity'].unique()
 
 #==============================================================================
+#                 Placeholder for valid plots, remove afterwards
+#==============================================================================  
+df = px.data.gapminder().query("country=='Canada'")
+
+#==============================================================================
 #                            Layout for lineplots
 #==============================================================================   
 
 tab2_lineplots = dbc.Col([
+
+        dcc.RangeSlider(min=0, 
+                max=20, 
+                step=1, 
+                value=[5, 15],
+                id="tab2-years-rangeslider"),
+        html.Br(),
+
         html.H4("Fossil"),
         dcc.Graph(id="tab2-lineplot-fossil"),
         html.Br(),
@@ -32,12 +45,7 @@ tab2_lineplots = dbc.Col([
         html.Br(),
         
         html.H4("Renewable"),
-        dcc.Graph(id="tab2-lineplot-renewable"),
-        html.Br(),
-        
-        dcc.RangeSlider(1950, 2022, 5,
-                   value=1980,
-                   id="tab2-years-rangeslider"),
+        dcc.Graph(id="tab2-lineplot-renewable")
         
     ])
 
@@ -48,46 +56,45 @@ tab2_lineplots = dbc.Col([
 
 @callback(
     Output("tab2-lineplot-fossil", "figure"), 
-    Input("tab2-country-dropdown", "countries"), 
-    Input("tab2-region-dropdown", "regions"), 
-    Input("tab2-world-toggle", "world"), 
-    Input("tab2-years-rangeslider", "years"))
-def lineplot_fossil(years):
+    Input("tab2-country-dropdown", "value"), 
+    Input("tab2-region-dropdown", "value"), 
+    Input("tab2-world-toggle", "value"), 
+    Input("tab2-years-rangeslider", "value"))
+def lineplot_fossil(country, region, toggle, years):
     """
     Docs
     """
-    fig = "Lineplot for fossil"
-
+    fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
     return fig
     
     
 @callback(
     Output("tab2-lineplot-nuclear", "figure"), 
-    Input("tab2-country-dropdown", "countries"), 
-    Input("tab2-region-dropdown", "regions"), 
-    Input("tab2-world-toggle", "world"), 
-    Input("tab2-years-rangeslider", "years"))
-def lineplot_nuclear(years):
+    Input("tab2-country-dropdown", "value"), 
+    Input("tab2-region-dropdown", "value"), 
+    Input("tab2-world-toggle", "value"), 
+    Input("tab2-years-rangeslider", "value"))
+def lineplot_nuclear(country, region, toggle, years):
     """
     Docs
     """
-    fig = "Lineplot for nuclear"
+    fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
 
     return fig
     
     
 @callback(
     Output("tab2-lineplot-renewable", "figure"), 
-    Input("tab2-country-dropdown", "countries"), 
-    Input("tab2-region-dropdown", "regions"), 
-    Input("tab2-world-toggle", "world"), 
-    Input("tab2-years-rangeslider", "years"))
-def lineplot_renewable(years):
+    Input("tab2-country-dropdown", "value"), 
+    Input("tab2-region-dropdown", "value"), 
+    Input("tab2-world-toggle", "value"), 
+    Input("tab2-years-rangeslider", "value"))
+def lineplot_renewable(country, region, toggle, years):
     """
     Docs
     """
-    fig = "Lineplot for renewable"
-
+    fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
+    
     return fig
     
     

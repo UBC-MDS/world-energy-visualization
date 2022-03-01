@@ -102,7 +102,8 @@ def display_barchart(energy_type, year):
     """
     Docs
     """
-    fig = "Barchart with top 10 countries"
+    df = px.data.gapminder().query("country=='Canada'")
+    fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
     
     return fig
 
