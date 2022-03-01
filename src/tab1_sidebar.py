@@ -6,7 +6,7 @@ import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
 
-df_all = pd.read_csv("../data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
+df_all = pd.read_csv("data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
 
 df_notna = df_all[df_all['Code'].notna()]
 df_countries = df_notna[df_notna['Code']!='OWID_WRL']

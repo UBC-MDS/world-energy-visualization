@@ -13,7 +13,7 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
 
 
 
-df_all = pd.read_csv("../data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
+df_all = pd.read_csv("data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
 df_notna = df_all[df_all['Code'].notna()]
 df_notna = df_notna.rename(columns={"Fossil fuels (% sub energy)": "Fossil", 
                          "Renewables (% sub energy)": "Renewables", 
