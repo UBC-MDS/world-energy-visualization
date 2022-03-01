@@ -63,7 +63,11 @@ tab1_plots = dbc.Col(
                         html.H5("Number of countries"),
                         html.Br(),
                         dbc.Input(
-                            id="tab1-input-topN", value=10, type="number", debounce=True
+                            id="tab1-input-topN",
+                            value=10,
+                            type="number",
+                            debounce=True,
+                            required=True,
                         ),
                     ]
                 ),
@@ -159,7 +163,15 @@ def display_barchart(energy_type, year, topN, top_bot):
         range_color=[0, 100],
         color_continuous_scale=px.colors.sequential.YlGn,
         range_x=[0, 100],
+        text_auto=True,
     )
+
+    fig_bar.update_layout(
+        xaxis_title="Percentage %",
+        yaxis_title="Country",
+        legend_title="%",
+    )
+    fig_bar.update_coloraxes(showscale=False)
 
     if top_bot == "Top":
         fig_bar.update_layout(
