@@ -6,7 +6,7 @@ import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
 
-df_all = pd.read_csv("data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
+df_all = pd.read_csv("../data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
 
 df_notna = df_all[df_all['Code'].notna()]
 df_countries = df_notna[df_notna['Code']!='OWID_WRL']
@@ -20,12 +20,12 @@ list_of_countries = df_countries['Entity'].unique()
 #                            SideBar1
 #==============================================================================  
 
-SIDEBAR_STYLE = {
+SIDEBAR1_STYLE = {
     "position": "fixed",
     "top": 0,
     "left": 0,
     "bottom": 0,
-    #"width": "18rem",
+    "width": "18rem",
     "padding": "2rem 1rem",
     "background-image": "url(/assets/wind-energy.jpg)"
     # "background-color": "#98FB98",
@@ -82,7 +82,7 @@ sidebar1 = dbc.Col([
             '''),
         ),
     ],
-    md=2,
-    style=SIDEBAR_STYLE,
+    # md=2,
+    style=SIDEBAR1_STYLE,
 )
 

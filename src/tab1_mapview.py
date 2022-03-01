@@ -13,7 +13,7 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
 
 
 
-df_all = pd.read_csv("data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
+df_all = pd.read_csv("../data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
 df_notna = df_all[df_all['Code'].notna()]
 df_notna = df_notna.rename(columns={"Fossil fuels (% sub energy)": "Fossil", 
                          "Renewables (% sub energy)": "Renewables", 
@@ -32,7 +32,7 @@ list_of_countries = df_countries['Entity'].unique()
 #                            Layout for map and barchart 
 #==============================================================================       
     
-tab1_plots = html.Div([
+tab1_plots = dbc.Col([
     dcc.Graph(id="tab1-map"),
     dcc.Slider( id='tab1-year-slider', 
                 min=1965, 

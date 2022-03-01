@@ -9,7 +9,7 @@ import plotly.graph_objects as go
 from tab2_trends import tab2_lineplots
 #from app import SIDEBAR_STYLE
 
-df_all = pd.read_csv("data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
+df_all = pd.read_csv("../data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
 
 df_notna = df_all[df_all['Code'].notna()]
 df_countries = df_notna[df_notna['Code']!='OWID_WRL']
@@ -23,8 +23,8 @@ list_of_countries = df_countries['Entity'].unique()
 #==============================================================================
 #                            Sidebar for Tab2
 #==============================================================================
-   
-SIDEBAR2_STYLE = {
+
+SIDEBAR_STYLE = {
     "position": "fixed",
     "top": 0,
     "left": 0,
@@ -32,18 +32,6 @@ SIDEBAR2_STYLE = {
     "width": "16rem",
     "padding": "2rem 1rem",
     "background-image": "url(/assets/wind-energy.jpg)"
-    # "background-color": "#f8f9fa",
-}
-
-SIDEBAR_STYLE = {
-    "position": "fixed",
-    "top": 0,
-    "left": 0,
-    "bottom": 0,
-    #"width": "18rem",
-    "padding": "2rem 1rem",
-    "background-image": "url(/assets/wind-energy.jpg)"
-    # "background-color": "#98FB98",
 }
 
 sidebar2 = dbc.Col([

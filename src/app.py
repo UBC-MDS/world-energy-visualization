@@ -27,31 +27,33 @@ TABS_STYLE = {
 
 app.layout = dbc.Container([
                     dbc.Row([
-                        sidebar1,
-                            dbc.Col([
-                                dbc.Tabs([
-                                    dbc.Tab(
-                                        tab1_plots,
-                                        label="Map view",
-                                        tab_id="tab1_mapview",
-                                    ),
-                                    dbc.Tab(
-                                        tab2_layout,
-                                        label="Trends",
-                                        tab_id="tab2_trends",
-                                    ),
-                                ],
-                                id="tabs",
-                                active_tab="tab1_mapview",
-                                )
+                        dbc.Col([
+                            sidebar1
+                        ]),
+                        
+                        dbc.Col([
+                            dbc.Tabs([
+                                dbc.Tab(
+                                    tab1_plots,
+                                    label="Map view",
+                                    tab_id="tab1_mapview",
+                                ),
+                                dbc.Tab(
+                                    tab2_layout,
+                                    label="Trends",
+                                    tab_id="tab2_trends",
+                                ),
                             ],
-                            md=10,
-                            style=TABS_STYLE,
+                            id="tabs",
+                            active_tab="tab1_mapview",
+                            )
+                        ],
+                        # style=TABS_STYLE,
                     ),
-])],
-fluid=True,
-style={"width": "80%",},
-)
+            ])],
+                fluid=True,
+                style={"width": "80%",},
+            )
 
 
 
