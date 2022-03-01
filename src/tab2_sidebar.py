@@ -1,4 +1,3 @@
-import dash
 from dash import Input, Output, callback, html, dcc
 import dash_bootstrap_components as dbc
 
@@ -10,7 +9,7 @@ import plotly.graph_objects as go
 from tab2_trends import tab2_lineplots
 #from app import SIDEBAR_STYLE
 
-df_all = pd.read_csv("../data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
+df_all = pd.read_csv("data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv")
 
 df_notna = df_all[df_all['Code'].notna()]
 df_countries = df_notna[df_notna['Code']!='OWID_WRL']
