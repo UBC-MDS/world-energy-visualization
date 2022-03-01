@@ -28,15 +28,19 @@ list_yrs = df_all['Year'].unique()
 #==============================================================================   
 
 tab2_lineplots = dbc.Col([
-
-        dcc.RangeSlider(
-            min=list_yrs.min(), 
-            max=list_yrs.max(), 
-            step=1, 
-            value=[list_yrs.min(), list_yrs.max()],
-            marks={int(i): str(i) for i in np.append(list_yrs[::5], [list_yrs.max()])},
-            tooltip={"placement": "top", "always_visible": False},
-            id="tab2-years-rangeslider"),
+        html.Div(
+            dcc.RangeSlider(
+                min=list_yrs.min(), 
+                max=list_yrs.max(), 
+                step=1, 
+                value=[list_yrs.min(), list_yrs.max()],
+                marks={int(i): str(i) for i in np.append(list_yrs[::5], [list_yrs.max()])},
+                tooltip={"placement": "top", "always_visible": False},
+                id="tab2-years-rangeslider"),
+            style={
+                "padding-top": "30px"
+            }
+        ),
         html.Br(),
 
         html.H4("Fossil"),
@@ -71,6 +75,14 @@ def lineplot_fossil(country, region, toggle, years):
     df_use = df_use[(df_use['Year'] >= years[0]) & (df_use["Year"] <= years[1])]
     fig = px.line(df_use, x="Year", y="Fossil fuels (% sub energy)", color="Entity", 
         title=f'Fossil fuels usage from {years[0]} to {years[1]}')
+    fig.update_layout(
+        title={
+            "x": 0.5,
+            "y": 0.8,
+            "xanchor": "center",
+            "yanchor": "bottom"
+        }
+    )
     return fig
     
     
@@ -88,6 +100,14 @@ def lineplot_nuclear(country, region, toggle, years):
     df_use = df_use[(df_use['Year'] >= years[0]) & (df_use["Year"] <= years[1])]
     fig = px.line(df_use, x="Year", y="Nuclear (% sub energy)", color="Entity", 
         title=f'Nuclear fuel usage from {years[0]} to {years[1]}')
+    fig.update_layout(
+        title={
+            "x": 0.5,
+            "y": 0.8,
+            "xanchor": "center",
+            "yanchor": "bottom"
+        }
+    )
 
     return fig
     
@@ -106,6 +126,14 @@ def lineplot_renewable(country, region, toggle, years):
     df_use = df_use[(df_use['Year'] >= years[0]) & (df_use["Year"] <= years[1])]
     fig = px.line(df_use, x="Year", y="Renewables (% sub energy)", color="Entity", 
         title=f'Renewables usage from {years[0]} to {years[1]}')
+    fig.update_layout(
+        title={
+            "x": 0.5,
+            "y": 0.8,
+            "xanchor": "center",
+            "yanchor": "bottom"
+        }
+    )
     
     return fig
     
