@@ -28,7 +28,13 @@ list_yrs = df_all['Year'].unique()
 #==============================================================================   
 
 tab2_lineplots = dbc.Col([
-        html.Div(
+        html.Div([
+            html.P(
+                "Select the year range for the below plots:",
+                style={
+                    "color": "#888888"
+                }
+            ),
             dcc.RangeSlider(
                 min=list_yrs.min(), 
                 max=list_yrs.max(), 
@@ -36,22 +42,22 @@ tab2_lineplots = dbc.Col([
                 value=[list_yrs.min(), list_yrs.max()],
                 marks={int(i): str(i) for i in np.append(list_yrs[::5], [list_yrs.max()])},
                 tooltip={"placement": "top", "always_visible": False},
-                id="tab2-years-rangeslider"),
+                id="tab2-years-rangeslider")],
             style={
                 "padding-top": "30px"
             }
         ),
         html.Br(),
 
-        html.H4("Fossil"),
+        #html.H4("Fossil"),
         dcc.Graph(id="tab2-lineplot-fossil"),
-        html.Br(),
+        #html.Br(),
         
-        html.H4("Nuclear"),
+        #html.H4("Nuclear"),
         dcc.Graph(id="tab2-lineplot-nuclear"),
-        html.Br(),
+        #html.Br(),
         
-        html.H4("Renewable"),
+        #html.H4("Renewable"),
         dcc.Graph(id="tab2-lineplot-renewable")
         
     ])

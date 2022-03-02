@@ -31,18 +31,22 @@ SIDEBAR_STYLE = {
     "bottom": 0,
     #"width": "16rem",
     "padding": "2rem 1rem",
-    "background-image": "url(/assets/wind-energy.jpg)"
+    "background-image": "url(/assets/wind-energy.jpg)",
+    "background-color": "rgba(255,255,255,0.6)",
+    "background-blend-mode": "overlay",
 }
 
 sidebar2 = dbc.Col([
-        html.H3("Historical Trends"),
+    
+        html.H3("World Energy Visualisation"),
+        html.H4("Historical Trends", style={"color":"#686868"}),
         html.Br(),
         
         html.H5(
             "Country",
             style={"width": "50%", "display": "inline-block"},
         ),
-        html.Br(),
+        html.P("Select a country to visualize its trend:", style={"color":"#686868", "margin": 0, "font-size": "14px"}),
         
         dbc.Col(
             dcc.Dropdown(
@@ -61,7 +65,7 @@ sidebar2 = dbc.Col([
             "Region",
             style={"width": "50%", "display": "inline-block"},
         ),
-        html.Br(),
+        html.P("Select regions to compare with the country:", style={"color":"#686868", "margin": 0, "font-size": "14px"}),
         dbc.Col(
             dcc.Dropdown(
                 id="tab2-region-dropdown",
@@ -76,18 +80,22 @@ sidebar2 = dbc.Col([
         ),
         html.Br(),
         
-        html.H5(
-            "World",
-            style={"width": "50%", "display": "inline-block"},
-        ),
-        dbc.Checklist(
-            options=[
-                {"label": "", "value": 1},
-            ],
-            value=[1],
-            id="tab2-world-toggle",
-            switch=True,
-        ),
+        dbc.Row([
+            html.H5(
+                "Show World Trend",
+                style={"width": "80%", "display": "inline-block"},
+            ),
+            dbc.Checklist(
+                options=[
+                    {"label": "", "value": 1},
+                ],
+                value=[1],
+                id="tab2-world-toggle",
+                switch=True,
+            )
+        ], style={
+            "margin-left": "0px"
+        })
     ],
     md=2,
     style=SIDEBAR_STYLE,
