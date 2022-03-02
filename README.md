@@ -39,10 +39,37 @@ At the second tab of the app, users will be able to select one or a few countrie
 If you have any ideas regarding to this project and wish to help, you are welcome to contribute.
 
 ### Calling for developer
-
+The dashboard currently have implemented all the basic functionality, yet there are some potential enhancements and additional features. We welcome all contributors to help with implementation of the following features.  
 ### What do we need
+Pontential features include:
+- Add an chronological animation to the world map
+- Visualization of locations & production of power plants
+- Trends of energy consumption & producton by individual source of energy
 
+You are also welcomed to raise new ideas and report any existing bugs. Please go through the [contributing guidelines](CONTRIBUTING.md) for the recommended ways to do so.
 ### How to install and run locally
+To run the dashboard locally, it is recommeded to use a virtual environment like [venv](https://docs.python.org/3/library/venv.html) or [Anaconda](https://www.anaconda.com/). For simplicity, we could demonstrate the installiation process with venv.
+
+#### Set up
+Run the following command at the root directory of the project:
+```
+# Create the virtual environment
+python -m venv energy-viz
+
+# Activate the environment
+source energy-viz/bin/activate
+
+# Install the requirements
+pip install -r requirements.txt
+```
+
+#### Run the dashboard
+```
+python src/app.py
+```
+The dashboard could then be accessed locally in <localhost:8050>, and you are good to go!
+
+### Contributing Guidelines
 
 You may also please review our [contributing guidelines](CONTRIBUTING.md) for more information.
 
