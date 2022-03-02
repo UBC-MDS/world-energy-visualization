@@ -58,7 +58,10 @@ tab1_plots = dbc.Col(
         ),
         html.Br(),
         html.H4("Top/Bottom energy consumer nations"),
-        html.Br(),
+        html.H6(
+            "Select the number of countries to view in the bar plot using the input tab, then select whether to view to the top or bottom consumers. The plot has an hover option to view the percentage if the text is too small.",
+            style={"font-size": "15px"},
+        ),
         html.Br(),
         dbc.Row(
             [
@@ -168,12 +171,12 @@ def display_barchart(energy_type, region, year, topN, top_bot):
     """
 
     if top_bot == "Top":
-        df_sorted = df_notna.query(
+        df_sorted = df_countries.query(
             "Year==@year & energy_type==@energy_type"
         ).sort_values(["percentage"], ascending=False)[:topN]
 
     elif top_bot == "Bottom":
-        df_sorted = df_notna.query(
+        df_sorted = df_countries.query(
             "Year==@year & energy_type==@energy_type"
         ).sort_values(["percentage"], ascending=False)[-topN:]
 
