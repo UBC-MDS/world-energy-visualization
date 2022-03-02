@@ -9,6 +9,7 @@ import plotly.graph_objects as go
 from urllib.request import urlopen
 import json
 
+
 with urlopen(
     "https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json"
 ) as response:
@@ -49,18 +50,24 @@ tab1_plots = dbc.Col(
             id="tab1-year-slider",
             min=1965,
             max=2015,
-            step=5,
+            step=1,
             value=2015,
             marks={i: str(i) for i in range(1965, 2015 + 1, 5)},
+            tooltip={"placement": "top", "always_visible": True},
+            updatemode="drag",
         ),
-        html.H4("Top N countries"),
         html.Br(),
-        dcc.Graph(id="tab1-barchart"),
+        html.H4("Top/Bottom energy consumer nations"),
+        html.Br(),
+        html.Br(),
         dbc.Row(
             [
                 dbc.Col(
                     [
-                        html.H5("Number of countries"),
+                        html.H4(
+                            "Number of countries",
+                            style={"font-size": "20px"},
+                        ),
                         html.Br(),
                         dbc.Input(
                             id="tab1-input-topN",
@@ -68,23 +75,38 @@ tab1_plots = dbc.Col(
                             type="number",
                             debounce=True,
                             required=True,
+                            minlength=1,
                         ),
                     ]
                 ),
                 dbc.Col(
                     [
-                        html.H5("Ranking type"),
+                        html.H4(
+                            "Ranking type",
+                            style={"font-size": "20px"},
+                        ),
                         html.Br(),
                         dcc.RadioItems(
                             ["Top", "Bottom"],
                             value="Top",
                             id="tab1_top_bot",
                             inline=True,
+                            labelStyle={
+                                "margin-right": "10px",
+                                "margin-top": "1px",
+                                "display": "inline-block",
+                                "horizontal-align": "",
+                            },
                         ),
-                    ]
+                    ],
+                    style={
+                        "padding": "0px 0px 0px 50px",
+                    },
                 ),
             ]
         ),
+        html.Br(),
+        dcc.Graph(id="tab1-barchart"),
     ]
 )
 
@@ -135,11 +157,12 @@ def display_map(energy_type, year):
 @callback(
     Output("tab1-barchart", "figure"),
     Input("tab1-energy-type-dropdown", "value"),
+    Input("tab1-region-dropdown", "value"),
     Input("tab1-year-slider", "value"),
     Input("tab1-input-topN", "value"),
     Input("tab1_top_bot", "value"),
 )
-def display_barchart(energy_type, year, topN, top_bot):
+def display_barchart(energy_type, region, year, topN, top_bot):
     """
     Docs
     """
