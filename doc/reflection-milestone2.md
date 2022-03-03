@@ -25,6 +25,7 @@ At the second tab of the app, users will be able to select one or a few countrie
 ### Barchat Chart of Top N Energy Consumption (tab1)
 
 ### Line plot of Energy Consumption by energy (tab2)
+Currently, the tab visualizes only the trend of energy consumption of major energy sources with line plots. Since the dataset has a more comprehensive data, including percentage of production and consumption of individual sources of energy, we would consider adding these plots along with corresponding filter and selection boxes. Moreover, the `Region` box now only has 3 options, `North America`, `Europe` and `Africa`, which is due to the sparcity of the dataset. However, it is also considered to compute the data values of missing continents and sub-regions by data from corresponding countries.
 
 ## Limitation of the Dashboard
 

@@ -27,8 +27,11 @@ SIDEBAR1_STYLE = {
     "bottom": 0,
     #"width": "18rem",
     "padding": "2rem 1rem",
-    "background-image": "url(/assets/wind-energy.jpg)"
+    "background-image": "url(/assets/wind-energy.jpg)",
     # "background-color": "#98FB98",
+    "background-color": "rgba(255,255,255,0.6)",
+    "background-blend-mode": "overlay",
+
 }
 
 

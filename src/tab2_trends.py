@@ -1,6 +1,7 @@
 from dash import Input, Output, callback, html, dcc
 import dash_bootstrap_components as dbc
 
+import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.io as pio
@@ -20,30 +21,43 @@ list_of_countries = df_countries['Entity'].unique()
 #==============================================================================
 #                 Placeholder for valid plots, remove afterwards
 #==============================================================================  
-df = px.data.gapminder().query("country=='Canada'")
+list_yrs = df_all['Year'].unique()
 
 #==============================================================================
 #                            Layout for lineplots
 #==============================================================================   
 
 tab2_lineplots = dbc.Col([
-
-        dcc.RangeSlider(min=0, 
-                max=20, 
+        html.Div([
+            html.P(
+                "Select the year range for the below plots:",
+                style={
+                    "color": "#888888"
+                }
+            ),
+            dcc.RangeSlider(
+                min=list_yrs.min(), 
+                max=list_yrs.max(), 
                 step=1, 
-                value=[5, 15],
-                id="tab2-years-rangeslider"),
+                value=[list_yrs.min(), list_yrs.max()],
+                marks={int(i): str(i) for i in np.append(list_yrs[::5], [list_yrs.max()])},
+                tooltip={"placement": "top", "always_visible": False},
+                id="tab2-years-rangeslider")],
+            style={
+                "padding-top": "30px"
+            }
+        ),
         html.Br(),
 
-        html.H4("Fossil"),
+        #html.H4("Fossil"),
         dcc.Graph(id="tab2-lineplot-fossil"),
-        html.Br(),
+        #html.Br(),
         
-        html.H4("Nuclear"),
+        #html.H4("Nuclear"),
         dcc.Graph(id="tab2-lineplot-nuclear"),
-        html.Br(),
+        #html.Br(),
         
-        html.H4("Renewable"),
+        #html.H4("Renewable"),
         dcc.Graph(id="tab2-lineplot-renewable")
         
     ])
@@ -63,7 +77,18 @@ def lineplot_fossil(country, region, toggle, years):
     """
     Docs
     """
-    fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
+    df_use = df_all[df_all['Entity'].isin([country] + region + len(toggle) * ["World"])]
+    df_use = df_use[(df_use['Year'] >= years[0]) & (df_use["Year"] <= years[1])]
+    fig = px.line(df_use, x="Year", y="Fossil fuels (% sub energy)", color="Entity", 
+        title=f'Fossil fuels usage from {years[0]} to {years[1]}')
+    fig.update_layout(
+        title={
+            "x": 0.5,
+            "y": 0.8,
+            "xanchor": "center",
+            "yanchor": "bottom"
+        }
+    )
     return fig
     
     
@@ -77,7 +102,18 @@ def lineplot_nuclear(country, region, toggle, years):
     """
     Docs
     """
-    fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
+    df_use = df_all[df_all['Entity'].isin([country] + region + len(toggle) * ["World"])]
+    df_use = df_use[(df_use['Year'] >= years[0]) & (df_use["Year"] <= years[1])]
+    fig = px.line(df_use, x="Year", y="Nuclear (% sub energy)", color="Entity", 
+        title=f'Nuclear fuel usage from {years[0]} to {years[1]}')
+    fig.update_layout(
+        title={
+            "x": 0.5,
+            "y": 0.8,
+            "xanchor": "center",
+            "yanchor": "bottom"
+        }
+    )
 
     return fig
     
@@ -92,7 +128,18 @@ def lineplot_renewable(country, region, toggle, years):
     """
     Docs
     """
-    fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
+    df_use = df_all[df_all['Entity'].isin([country] + region + len(toggle) * ["World"])]
+    df_use = df_use[(df_use['Year'] >= years[0]) & (df_use["Year"] <= years[1])]
+    fig = px.line(df_use, x="Year", y="Renewables (% sub energy)", color="Entity", 
+        title=f'Renewables usage from {years[0]} to {years[1]}')
+    fig.update_layout(
+        title={
+            "x": 0.5,
+            "y": 0.8,
+            "xanchor": "center",
+            "yanchor": "bottom"
+        }
+    )
     
     return fig
     
