@@ -45,6 +45,10 @@ list_of_countries = df_countries["Entity"].unique()
 
 tab1_plots = dbc.Col(
     [
+        html.H6(
+            "Select the energy type in side bar. Drag and select the number of year to view the change of engergy consumption distribution using the slide bar. You can hover or zoom to get the details of a specific region",
+            style={"font-size": "15px"},
+        ),
         dcc.Graph(id="tab1-map"),
         dcc.Slider(
             id="tab1-year-slider",
@@ -133,7 +137,8 @@ def display_map(energy_type, year):
         df,
         locations="Code",
         color="percentage",
-        hover_name="energy_type",
+        hover_name="Entity",
+        hover_data=["energy_type", "Code"],
         color_continuous_scale=px.colors.sequential.YlGn,
         range_color=[0, 100],
     )
@@ -160,12 +165,11 @@ def display_map(energy_type, year):
 @callback(
     Output("tab1-barchart", "figure"),
     Input("tab1-energy-type-dropdown", "value"),
-    Input("tab1-region-dropdown", "value"),
     Input("tab1-year-slider", "value"),
     Input("tab1-input-topN", "value"),
     Input("tab1_top_bot", "value"),
 )
-def display_barchart(energy_type, region, year, topN, top_bot):
+def display_barchart(energy_type, year, topN, top_bot):
     """
     Docs
     """
