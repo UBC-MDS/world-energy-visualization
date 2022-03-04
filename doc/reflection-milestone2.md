@@ -39,8 +39,14 @@ of energy consumption over time will be realized as line plots as schematically 
 ### World Map of Energy Consumption (tab1)
 
 - Animation of map can be added to show the change of energy consumption throughout the years
+- Regional filter can be incorporated, with auto zoom into the region based on the selection 
 
-### Barchat Chart of Top N Energy Consumption (tab1)
+### Bar Chart of Top 'N'/Bottom 'N' Energy Consumers (tab1)
+
+- This chart displays a specified number of top or bottom consumers by percentage for the selected energy source and year. 
+- Currently, the ordering is only computed using the percentage of consumption. Hence very large and small countries are compared on the same scale. Though the data does not have the actual units of consuption, a proxy metric such as the units of power generated from different sources can also be incorporated to get a better sense of the scale. Another solution is to incorporate this data using an additional data source.
+- One limitation with this plot is that there are certain years in which multiple countries have a 0% consuption for a type of energy source. This is particularly true for the nuclear energy consuption, as only a few countries in the world have access to it. Hence a useful feature to incorporate would be an option for the user to filter out zeros when looking at the bottom countries. This ensures that the information is filtered transparently, and that the user is not mislead by the results. 
+- The regional filter can be incorporated to list the top/bottom countries by region. 
 
 ### Line plot of Energy Consumption by energy (tab2)
 
@@ -54,3 +60,4 @@ and sub-regions by data from corresponding countries.
 ## Limitation of the Dashboard
 
 - The dashboard is better to be used full screen on Chrome, not mobile compatable.
+- A loading icon can be incorporated for all the plots as the render to let the user know that the plots are rendering. 
