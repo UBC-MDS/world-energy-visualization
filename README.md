@@ -44,19 +44,15 @@ your time in wraggling complex data. Let us analyze the data for you so you don'
 
 ## Description of the Dashboard
 
-> Place holder for the Git
+![](doc/demo.gif)
 
-World Energy Visualizatoin dashboard will consists of two tabs, where the first tab provides a high level overview,
+As can be seen on short demonstration above World Energy Visualizatoin dashboard onsists of two tabs, where the first tab provides a high level overview,
 while the second tab gives a more granular detailed information about trends for energy consuption over many years.  
-As can be seen from the sketch shown in Figure 1, in the main dashboard users will be able gain a high level insight
-about countries with some dominant type of energy, such as "nuclear", "fossil fuel" or "renewable energy". Also with
-a simple switch, users of the dashboard will be able to identify countries at the bottom of the list, which are lagging
-behind in adoption of certain type of energy. Besides this tab of the dashboard will provide visualization of the world
-map colored by a fraction of energy type consumed in each country.
 
-At the second tab of the dashboard, users will be able to select one or a few countries for comparison between each
-other or with certain regions. All those trends of energy consumption over time will be realized as line plots as
-schematically shown in Figure 2.
+In the main dashboard users are able gain an insight about countries with some dominant type of energy, such as "nuclear", "fossil fuel" or "renewable energy". This is realized with visualization of the world map colored by a fraction of energy type consumed in each country. Also with a simple switch, users of the dashboard can identify countries at the bottom of the list, which are lagging behind in adoption of certain type of energy.
+
+At the second tab of the dashboard, users can select one or a few countries for comparison between each
+other or with certain regions.
 
 ## Contributing to this Dashboard
 
