@@ -144,6 +144,7 @@ def display_map(energy_type, year):
     )
 
     fig.update_layout(
+        dragmode=False,
         title={
             "text": "Global "
             + str(energy_type)
@@ -151,7 +152,7 @@ def display_map(energy_type, year):
             + str(year),
             "x": 0.5,
             "xanchor": "center",
-        }
+        },
     )
 
     return fig
@@ -220,7 +221,7 @@ def display_barchart(energy_type, year, topN, top_bot):
 
     elif top_bot == "Bottom":
         fig_bar.update_layout(
-            yaxis={"categoryorder": "total descending"},
+            # yaxis={"categoryorder": "total descending"},
             title={
                 "text": "Bottom "
                 + str(topN)
