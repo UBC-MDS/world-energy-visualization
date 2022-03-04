@@ -19,10 +19,6 @@ df_continents = df_all[df_all["Code"].isna()]
 
 list_of_continents = df_continents["Entity"].unique()
 list_of_countries = df_countries["Entity"].unique()
-
-# ==============================================================================
-#                 Placeholder for valid plots, remove afterwards
-# ==============================================================================
 list_yrs = df_all["Year"].unique()
 
 # ==============================================================================
@@ -81,7 +77,7 @@ def lineplot_fossil(country, region, toggle, years):
     fig = px.line(
         df_use,
         x="Year",
-        y="Fossil fuels (% sub energy)",
+        y="Fossil",
         color="Entity",
         title=f"Fossil fuels usage from {years[0]} to {years[1]}",
     )
@@ -107,7 +103,7 @@ def lineplot_nuclear(country, region, toggle, years):
     fig = px.line(
         df_use,
         x="Year",
-        y="Nuclear (% sub energy)",
+        y="Nuclear",
         color="Entity",
         title=f"Nuclear fuel usage from {years[0]} to {years[1]}",
     )
@@ -134,7 +130,7 @@ def lineplot_renewable(country, region, toggle, years):
     fig = px.line(
         df_use,
         x="Year",
-        y="Renewables (% sub energy)",
+        y="Renewables",
         color="Entity",
         title=f"Renewables usage from {years[0]} to {years[1]}",
     )

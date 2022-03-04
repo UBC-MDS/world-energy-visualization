@@ -39,10 +39,15 @@ SIDEBAR1_STYLE = {
 sidebar1 = dbc.Col(
     [
         html.H3("World Energy Visualisation"),
+        html.H4("Global Distribution", style={"color": "#686868"}),
         html.Br(),
         html.H5(
             "Energy type",
             # style={"width": "50%", "display": "inline-block"},
+        ),
+        html.P(
+            "Select a energy type for visualization:",
+            style={"color": "#686868", "margin": 0, "font-size": "14px"},
         ),
         dbc.Row(
             dcc.Dropdown(
