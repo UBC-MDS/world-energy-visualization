@@ -46,7 +46,7 @@ The dashboard has been designed with 2 tabs - one to display the global trends i
 
 - This is a world chloropleth map that shows the percentage energy consuption for every country for the specified energy type. The year displayed on the plot is controlled by a slider below it.
 
-#### Limitations and future direction: 
+#### Limitations and future direction:
 
 - Animation of map can be added to show the change of energy consumption throughout the years instead of the user sliding across all the years manually.
 - The map can zoom into a particular region when selected to make it easier to anlyze those particular countries. It is currently difficult to view some of the smaller nations and regions with many nations.
@@ -55,9 +55,9 @@ The dashboard has been designed with 2 tabs - one to display the global trends i
 
 #### Current Implementation:
 
-- This chart displays a specified number of top or bottom consumer nations by percentage for the selected energy source. The year is controlled by the same slider as the world map so that both plots are synced. 
+- This chart displays a specified number of top or bottom consumer nations by percentage for the selected energy source. The year is controlled by the same slider as the world map so that both plots are synced.
 
-#### Limitations and fututre direction:
+#### Limitations and future direction:
 
 - The ordering is only computed using the percentage of consumption. Hence very large and small countries are compared on the same scale. Though the data does not have the actual units of consuption, a proxy metric such as the units of power generated from different sources can also be incorporated to get a better sense of the scale. Another solution is to incorporate this data using an additional data source.
 - There are certain years in which multiple countries have a 0% consuption for a type of energy source. This is particularly true for the nuclear energy consuption, as only a few countries in the world have access to it. Hence a useful feature to incorporate would be an option for the user to filter out zeros when looking at the bottom countries. This ensures that the information is filtered transparently, and that the user is not mislead by the results. 
@@ -67,9 +67,10 @@ The dashboard has been designed with 2 tabs - one to display the global trends i
 
 #### Current Implementation:
 
-- Currently, the tab visualizes only the trend of energy consumption of major energy sources with line plots.
+- These charts display the percentage of energy sources consumed by country, region, as well as the world trend. The lines displayed are controlled by the selection boxes in the sidebar.
+- Currently, the tab visualizes only the trend of energy consumption of major energy sources, i.e. Fossil fuels, Nuclear and Renewables, with line plots.
 
-#### Limitations and fututre direction:
+#### Limitations and future direction:
 
 - Since the dataset has a more comprehensive data, including percentage of production and consumption of individual
 sources of energy, we would consider adding these plots along with corresponding filter and selection boxes.
@@ -81,4 +82,4 @@ and sub-regions by data from corresponding countries.
 ### Limitation of the overall Dashboard
 
 - The dashboard is better to be used full screen on Chrome, not mobile compatable.
-- A loading icon can be incorporated for all the plots as the render to let the user know that the plots are rendering. 
+- A loading icon can be incorporated for all the plots as the render to let the user know that the plots are rendering.
