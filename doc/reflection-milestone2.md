@@ -13,26 +13,15 @@ The edited csv is stored in data folder.
 
 ### Dashboard design
 
-World Energy Visualizatoin dashboard will consists of two tabs, where the first tab provides a high level overview, while the second tab gives a more granular
-detailed information about trends for energy consuption over many years.  As can be seen from the sketch shown in Figure 1, in the main dashboard users will be
-able gain a high level insight about countries with some dominant type of energy, such as "nuclear", "fossil fuel" or "renewable energy". Also with a simple switch,
- users of the dashboard will be able to identify countries at the bottom of the list, which are lagging behind in adoption of certain type of energy. Besides this
- tab of the dashboard will provide visualization of the world map colored by a fraction of energy type consumed in each country.
+![](demo.gif)
 
-<p align="center">
-  <img src="1_map_and_bar_chart.PNG" width=600>
-  </br>
-  Figure 1. Overview of the main tab
-</p>
+As can be seen on short demonstration above World Energy Visualizatoin dashboard onsists of two tabs, where the first tab provides a high level overview,
+while the second tab gives a more granular detailed information about trends for energy consuption over many years.  
 
-At the second tab of the app, users will be able to select one or a few countries for comparison between each other or with certain regions. All those trends
-of energy consumption over time will be realized as line plots as schematically shown in Figure 2.
+In the main dashboard users are able gain an insight about countries with some dominant type of energy, such as "nuclear", "fossil fuel" or "renewable energy". This is realized with visualization of the world map colored by a fraction of energy type consumed in each country. Also with a simple switch, users of the dashboard can identify countries at the bottom of the list, which are lagging behind in adoption of certain type of energy.
 
-<p align="center">
-  <img src="2_trends.PNG" width=600>  
-  </br>
-  Figure 2. Prototype for the dashboard with trends
-</p>
+At the second tab of the dashboard, users can select one or a few countries for comparison between each
+other or with certain regions.
 
 ## Roadmap
 
@@ -59,5 +48,6 @@ and sub-regions by data from corresponding countries.
 
 ## Limitation of the Dashboard
 
-- The dashboard is better to be used full screen on Chrome, not mobile compatable.
+- The dashboard is better to be used full screen on Chrome, not mobile compatible.
 - A loading icon can be incorporated for all the plots as the render to let the user know that the plots are rendering. 
+- Additional work can done with making the app look more appealing. This can be implemented by tweaking style of the blocks inline or changing CSS settings. 
