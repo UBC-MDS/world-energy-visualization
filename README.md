@@ -100,6 +100,12 @@ python src/app.py
 
 The dashboard could then be accessed locally in <localhost:8050>, and you are good to go!
 
+#### Via Docker Compose
+Alternatively, you could run the dashboard locally in a Docker container with [docker compose](https://docs.docker.com/compose/). Run the following command at the root directory of the project:
+```
+docker-compose up
+```
+The dashboard would be then available at http://localhost:8000/
 ### Contributing Guidelines
 
 You may also please review our [contributing guidelines](CONTRIBUTING.md) for more information.
