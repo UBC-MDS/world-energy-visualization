@@ -43,27 +43,46 @@ list_yrs = df_all["Year"].unique()
 
 tab1_plots = dbc.Col(
     [
-        html.P(
-            "Drag and select the number of year to view the change of engergy consumption distribution using the slide bar. You can hover or zoom to get the details of a specific region.",
-            style={"color": "#888888"},
-        ),
+        dbc.Row([
+            html.H4("World Consumption by Country", style={"width": "fit-content"}),
+            dbc.Col(
+                        [
+                            dbc.Button(
+                                id="map_tooltip",
+                                color="secondary",
+                                children="?",
+                                size="sm",
+                                outline=True,
+                            ),
+                            dbc.Tooltip(
+                                "Drag and select the number of year to view the change of engergy consumption distribution using the slide bar. You can hover or zoom to get the details of a specific region.",
+                                target="map_tooltip",
+                                placement="bottom",
+                            ),
+                        ]                    )
+        ], style={"padding": "3vh 0"}),
+        #html.P(
+        #    "Drag and select the number of year to view the change of engergy consumption distribution using the slide bar. You can hover or zoom to get the details of a specific region.",
+        #    style={"color": "#888888"},
+        #),
         dcc.Graph(id="tab1-map"),
-        dcc.Slider(
-            id="tab1-year-slider",
-            min=list_yrs.min(),
-            max=list_yrs.max(),
-            step=1,
-            value=list_yrs.max(),
-            marks={int(i): str(i) for i in np.append(list_yrs[::5], [list_yrs.max()])},
-            tooltip={"placement": "top", "always_visible": True},
-            updatemode="drag",
+        html.Div(
+            dcc.Slider(
+                id="tab1-year-slider",
+                min=list_yrs.min(),
+                max=list_yrs.max(),
+                step=1,
+                value=list_yrs.max(),
+                marks={int(i): str(i) for i in np.append(list_yrs[::5], [list_yrs.max()])},
+                tooltip={"placement": "top", "always_visible": True},
+                updatemode="drag"
+            ),
+            style={"padding": "0vh 10vw"}
         ),
         html.Br(),
         dbc.Row(
             [
-                dbc.Col(
-                    html.H4("Top/Bottom energy consumer nations"),
-                ),
+                html.H4("Top/Bottom energy consumer nations", style={"width": "fit-content"}),
                 dbc.Col(
                     [
                         dbc.Button(
@@ -85,10 +104,10 @@ tab1_plots = dbc.Col(
                 ),
             ]
         ),
-        html.P(
-            "Select the number of countries to view in the bar plot using the input tab, then select whether to view to the top or bottom consumers. Hover the bar for details.",
-            style={"color": "#888888"},
-        ),
+        #html.P(
+        #    "Select the number of countries to view in the bar plot using the input tab, then select whether to view to the top or bottom consumers. Hover the bar for details.",
+        #    style={"color": "#888888"},
+        #),
         html.Br(),
         dbc.Row(
             [
@@ -96,12 +115,10 @@ tab1_plots = dbc.Col(
                     [
                         dbc.Row(
                             [
-                                dbc.Col(
                                     html.H4(
                                         "Number of countries",
-                                        style={"font-size": "20px"},
-                                    )
-                                ),
+                                        style={"font-size": "20px", "width": "fit-content"},
+                                    ),
                                 dbc.Col(
                                     [
                                         dbc.Button(
@@ -138,11 +155,9 @@ tab1_plots = dbc.Col(
                     [
                         dbc.Row(
                             [
-                                dbc.Col(
-                                    html.H4(
-                                        "Ranking type",
-                                        style={"font-size": "20px"},
-                                    )
+                                html.H4(
+                                    "Ranking type",
+                                    style={"font-size": "20px", "width": "fit-content"},
                                 ),
                                 dbc.Col(
                                     [
