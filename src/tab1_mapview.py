@@ -136,9 +136,32 @@ tab1_plots = dbc.Col(
                 ),
                 dbc.Col(
                     [
-                        html.H4(
-                            "Ranking type",
-                            style={"font-size": "20px"},
+                        dbc.Row(
+                            [
+                                dbc.Col(
+                                    html.H4(
+                                        "Ranking type",
+                                        style={"font-size": "20px"},
+                                    )
+                                ),
+                                dbc.Col(
+                                    [
+                                        dbc.Button(
+                                            id="top_bot_tooltip",
+                                            color="secondary",
+                                            children="?",
+                                            size="sm",
+                                            outline=True,
+                                        ),
+                                        dbc.Tooltip(
+                                            "Select whether you want to view the top or bottom consumers",
+                                            target="top_bot_tooltip",
+                                            placement="bottom",
+                                        ),
+                                    ],
+                                    style={"padding": "0px 480px 0px 0px"},
+                                ),
+                            ]
                         ),
                         html.Br(),
                         dcc.RadioItems(
