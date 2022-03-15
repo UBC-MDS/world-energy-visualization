@@ -10,13 +10,6 @@ import plotly.graph_objects as go
 from urllib.request import urlopen
 import json
 
-
-with urlopen(
-    "https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json"
-) as response:
-    counties = json.load(response)
-
-
 df_all = pd.read_csv(
     "data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv"
 )
@@ -27,7 +20,6 @@ df_notna = df_notna_wide.melt(
     var_name="energy_type",
     value_name="percentage",
 ).merge(df_notna_wide, on=["Year", "Code", "Entity"])
-
 
 df_countries = df_notna[df_notna["Code"] != "OWID_WRL"]
 df_world = df_notna[df_notna["Code"] == "OWID_WRL"]
@@ -219,6 +211,7 @@ def display_map(energy_type, year):
     Docs
     """
     df = df_notna.query("Year==@year & energy_type==@energy_type")
+    
     fig = px.choropleth(
         df,
         locations="Code",
@@ -235,9 +228,9 @@ def display_map(energy_type, year):
         color_continuous_scale=px.colors.sequential.YlGn,
         range_color=[0, 100],
     )
-
+    
     fig.update_layout(
-        dragmode=False,
+        dragmode="zoom",
         title={
             "text": "Global "
             + str(energy_type)
@@ -245,7 +238,11 @@ def display_map(energy_type, year):
             + str(year),
             "x": 0.5,
             "xanchor": "center",
-        },
+        }, 
+    )
+
+    fig.update_geos(
+        showcountries=True
     )
 
     return fig
