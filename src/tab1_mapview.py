@@ -59,7 +59,32 @@ tab1_plots = dbc.Col(
             updatemode="drag",
         ),
         html.Br(),
-        html.H4("Top/Bottom energy consumer nations"),
+        dbc.Row(
+            [
+                dbc.Col(
+                    html.H4("Top/Bottom energy consumer nations"),
+                ),
+                dbc.Col(
+                    [
+                        dbc.Button(
+                            id="bar_tooltip",
+                            color="secondary",
+                            children="?",
+                            size="sm",
+                            outline=True,
+                        ),
+                        dbc.Tooltip(
+                            "Select the number of countries to view in the bar plot using the input tab,"
+                            "then select whether to view to the top or bottom consumers."
+                            "Hover the bar for details.",
+                            target="bar_tooltip",
+                            placement="bottom",
+                        ),
+                    ],
+                    style={"padding": "0px 700px 0px 0px"},
+                ),
+            ]
+        ),
         html.P(
             "Select the number of countries to view in the bar plot using the input tab, then select whether to view to the top or bottom consumers. Hover the bar for details.",
             style={"color": "#888888"},
@@ -69,9 +94,32 @@ tab1_plots = dbc.Col(
             [
                 dbc.Col(
                     [
-                        html.H4(
-                            "Number of countries",
-                            style={"font-size": "20px"},
+                        dbc.Row(
+                            [
+                                dbc.Col(
+                                    html.H4(
+                                        "Number of countries",
+                                        style={"font-size": "20px"},
+                                    )
+                                ),
+                                dbc.Col(
+                                    [
+                                        dbc.Button(
+                                            id="topN_tooltip",
+                                            color="secondary",
+                                            children="?",
+                                            size="sm",
+                                            outline=True,
+                                        ),
+                                        dbc.Tooltip(
+                                            "Controls the number of countries to view in the barchart. Select upto 15 countries",
+                                            target="topN_tooltip",
+                                            placement="bottom",
+                                        ),
+                                    ],
+                                    style={"padding": "0px 350px 0px 0px"},
+                                ),
+                            ]
                         ),
                         html.Br(),
                         dbc.Input(
@@ -81,6 +129,8 @@ tab1_plots = dbc.Col(
                             debounce=True,
                             required=True,
                             minlength=1,
+                            max=15,
+                            min=0,
                         ),
                     ]
                 ),
@@ -207,7 +257,7 @@ def display_barchart(energy_type, year, topN, top_bot):
         },
         range_color=[0, 100],
         color_continuous_scale=px.colors.sequential.YlGn,
-        range_x=[0, 100],
+        range_x=[0, 105],
         text_auto=True,
     )
 
@@ -217,6 +267,7 @@ def display_barchart(energy_type, year, topN, top_bot):
         legend_title="%",
     )
     fig_bar.update_coloraxes(showscale=False)
+    fig_bar.update_traces(textposition="outside")
 
     if top_bot == "Top":
         fig_bar.update_layout(
