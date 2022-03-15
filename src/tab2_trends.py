@@ -82,7 +82,8 @@ def lineplot_fossil(country, region, toggle, years):
         title=f"Fossil fuels usage from {years[0]} to {years[1]}",
     )
     fig.update_layout(
-        title={"x": 0.5, "y": 0.8, "xanchor": "center", "yanchor": "bottom"}
+        title={"x": 0.5, "y": 0.8, "xanchor": "center", "yanchor": "bottom"},
+        yaxis_title="Fossil fuel Usage (%)"
     )
     return fig
 
@@ -108,7 +109,8 @@ def lineplot_nuclear(country, region, toggle, years):
         title=f"Nuclear fuel usage from {years[0]} to {years[1]}",
     )
     fig.update_layout(
-        title={"x": 0.5, "y": 0.8, "xanchor": "center", "yanchor": "bottom"}
+        title={"x": 0.5, "y": 0.8, "xanchor": "center", "yanchor": "bottom"},
+        yaxis_title="Nuclear energy Usage (%)"
     )
 
     return fig
@@ -135,7 +137,8 @@ def lineplot_renewable(country, region, toggle, years):
         title=f"Renewables usage from {years[0]} to {years[1]}",
     )
     fig.update_layout(
-        title={"x": 0.5, "y": 0.8, "xanchor": "center", "yanchor": "bottom"}
+        title={"x": 0.5, "y": 0.8, "xanchor": "center", "yanchor": "bottom"},
+        yaxis_title="Renewable energy Usage (%)"
     )
 
     return fig
