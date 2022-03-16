@@ -29,6 +29,14 @@ list_of_continents = df_continents["Entity"].unique()
 list_of_countries = df_countries["Entity"].unique()
 list_yrs = df_all["Year"].unique()
 
+proj_param = {
+    "World": [0, 0, 1],
+    "North America": [40, -120, 2],
+    "Europe": [50, 20, 4],
+    "Africa": [0, 20, 2]
+}
+
+
 # ==============================================================================
 #                            Layout for map and barchart
 # ==============================================================================
@@ -57,6 +65,20 @@ tab1_plots = dbc.Col(
         #    "Drag and select the number of year to view the change of engergy consumption distribution using the slide bar. You can hover or zoom to get the details of a specific region.",
         #    style={"color": "#888888"},
         #),
+        dbc.Row([
+            html.Div("Map View:", style={"width": "fit-content", "padding": "5px 0"}),
+            dbc.Col(
+                dcc.Dropdown(
+                    id="tab1-map-focus",
+                    options=[
+                        {"label": region, "value": region}
+                        for region in proj_param
+                    ],
+                    value="World",
+                    clearable=False
+                ),
+            )], style={"width": "20%", "padding-left": "10px"}
+        ),
         dcc.Graph(id="tab1-map"),
         html.Div(
             dcc.Slider(
@@ -205,11 +227,13 @@ tab1_plots = dbc.Col(
     Output("tab1-map", "figure"),
     Input("tab1-energy-type-dropdown", "value"),
     Input("tab1-year-slider", "value"),
+    Input("tab1-map-focus", "value")
 )
-def display_map(energy_type, year):
+def display_map(energy_type, year, scope):
     """
     Docs
     """
+    #scope = "Africa"
     df = df_notna.query("Year==@year & energy_type==@energy_type")
     
     fig = px.choropleth(
@@ -242,7 +266,9 @@ def display_map(energy_type, year):
     )
 
     fig.update_geos(
-        showcountries=True
+        showcountries=True,
+        center={"lat": proj_param[scope][0], "lon": proj_param[scope][1]},
+        projection={"scale": proj_param[scope][2]}
     )
 
     return fig
