@@ -10,13 +10,6 @@ import plotly.graph_objects as go
 from urllib.request import urlopen
 import json
 
-
-with urlopen(
-    "https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json"
-) as response:
-    counties = json.load(response)
-
-
 df_all = pd.read_csv(
     "data/Primary-energy-consumption-from-fossilfuels-nuclear-renewables.csv"
 )
@@ -28,7 +21,6 @@ df_notna = df_notna_wide.melt(
     value_name="percentage",
 ).merge(df_notna_wide, on=["Year", "Code", "Entity"])
 
-
 df_countries = df_notna[df_notna["Code"] != "OWID_WRL"]
 df_world = df_notna[df_notna["Code"] == "OWID_WRL"]
 df_continents = df_all[df_all["Code"].isna()]
@@ -37,33 +29,74 @@ list_of_continents = df_continents["Entity"].unique()
 list_of_countries = df_countries["Entity"].unique()
 list_yrs = df_all["Year"].unique()
 
+proj_param = {
+    "World": [0, 0, 1],
+    "North America": [40, -120, 2],
+    "Europe": [50, 20, 4],
+    "Africa": [0, 20, 2]
+}
+
+
 # ==============================================================================
 #                            Layout for map and barchart
 # ==============================================================================
 
 tab1_plots = dbc.Col(
     [
-        html.P(
-            "Drag and select the number of year to view the change of engergy consumption distribution using the slide bar. You can hover or zoom to get the details of a specific region.",
-            style={"color": "#888888"},
+        dbc.Row([
+            html.H4("World Consumption by Country", style={"width": "fit-content"}),
+            dbc.Col(
+                        [
+                            dbc.Button(
+                                id="map_tooltip",
+                                color="secondary",
+                                children="?",
+                                size="sm",
+                                outline=True,
+                            ),
+                            dbc.Tooltip(
+                                "Drag and select the number of year to view the change of engergy consumption distribution using the slide bar. You can hover or zoom to get the details of a specific region.",
+                                target="map_tooltip",
+                                placement="bottom",
+                            ),
+                        ]                    )
+        ], style={"padding": "3vh 0"}),
+        #html.P(
+        #    "Drag and select the number of year to view the change of engergy consumption distribution using the slide bar. You can hover or zoom to get the details of a specific region.",
+        #    style={"color": "#888888"},
+        #),
+        dbc.Row([
+            html.Div("Map View:", style={"width": "fit-content", "padding": "5px 0"}),
+            dbc.Col(
+                dcc.Dropdown(
+                    id="tab1-map-focus",
+                    options=[
+                        {"label": region, "value": region}
+                        for region in proj_param
+                    ],
+                    value="World",
+                    clearable=False
+                ),
+            )], style={"width": "20%", "padding-left": "10px"}
         ),
         dcc.Graph(id="tab1-map"),
-        dcc.Slider(
-            id="tab1-year-slider",
-            min=list_yrs.min(),
-            max=list_yrs.max(),
-            step=1,
-            value=list_yrs.max(),
-            marks={int(i): str(i) for i in np.append(list_yrs[::5], [list_yrs.max()])},
-            tooltip={"placement": "top", "always_visible": True},
-            updatemode="drag",
+        html.Div(
+            dcc.Slider(
+                id="tab1-year-slider",
+                min=list_yrs.min(),
+                max=list_yrs.max(),
+                step=1,
+                value=list_yrs.max(),
+                marks={int(i): str(i) for i in np.append(list_yrs[::5], [list_yrs.max()])},
+                tooltip={"placement": "top", "always_visible": True},
+                updatemode="drag"
+            ),
+            style={"padding": "0vh 10vw"}
         ),
         html.Br(),
         dbc.Row(
             [
-                dbc.Col(
-                    html.H4("Top/Bottom energy consumer nations"),
-                ),
+                html.H4("Top/Bottom energy consumer nations", style={"width": "fit-content"}),
                 dbc.Col(
                     [
                         dbc.Button(
@@ -85,10 +118,10 @@ tab1_plots = dbc.Col(
                 ),
             ]
         ),
-        html.P(
-            "Select the number of countries to view in the bar plot using the input tab, then select whether to view to the top or bottom consumers. Hover the bar for details.",
-            style={"color": "#888888"},
-        ),
+        #html.P(
+        #    "Select the number of countries to view in the bar plot using the input tab, then select whether to view to the top or bottom consumers. Hover the bar for details.",
+        #    style={"color": "#888888"},
+        #),
         html.Br(),
         dbc.Row(
             [
@@ -96,12 +129,10 @@ tab1_plots = dbc.Col(
                     [
                         dbc.Row(
                             [
-                                dbc.Col(
                                     html.H4(
                                         "Number of countries",
-                                        style={"font-size": "20px"},
-                                    )
-                                ),
+                                        style={"font-size": "20px", "width": "fit-content"},
+                                    ),
                                 dbc.Col(
                                     [
                                         dbc.Button(
@@ -138,11 +169,9 @@ tab1_plots = dbc.Col(
                     [
                         dbc.Row(
                             [
-                                dbc.Col(
-                                    html.H4(
-                                        "Ranking type",
-                                        style={"font-size": "20px"},
-                                    )
+                                html.H4(
+                                    "Ranking type",
+                                    style={"font-size": "20px", "width": "fit-content"},
                                 ),
                                 dbc.Col(
                                     [
@@ -198,12 +227,15 @@ tab1_plots = dbc.Col(
     Output("tab1-map", "figure"),
     Input("tab1-energy-type-dropdown", "value"),
     Input("tab1-year-slider", "value"),
+    Input("tab1-map-focus", "value")
 )
-def display_map(energy_type, year):
+def display_map(energy_type, year, scope):
     """
     Docs
     """
+    #scope = "Africa"
     df = df_notna.query("Year==@year & energy_type==@energy_type")
+    
     fig = px.choropleth(
         df,
         locations="Code",
@@ -220,9 +252,9 @@ def display_map(energy_type, year):
         color_continuous_scale=px.colors.sequential.YlGn,
         range_color=[0, 100],
     )
-
+    
     fig.update_layout(
-        dragmode=False,
+        dragmode="zoom",
         title={
             "text": "Global "
             + str(energy_type)
@@ -230,7 +262,13 @@ def display_map(energy_type, year):
             + str(year),
             "x": 0.5,
             "xanchor": "center",
-        },
+        }, 
+    )
+
+    fig.update_geos(
+        showcountries=True,
+        center={"lat": proj_param[scope][0], "lon": proj_param[scope][1]},
+        projection={"scale": proj_param[scope][2]}
     )
 
     return fig

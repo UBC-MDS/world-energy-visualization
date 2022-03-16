@@ -11,3 +11,7 @@
 ## Are there reoccurring themes in your feedback on what is good and what can be improved?
 
 ## Is there any feedback (or other insight) that you have found particularly valuable during your dashboard development?
+
+- From the peer review, some valuable feedbacks are made towards our layouts and graph visualizations.
+- One of the problems is that the zero-valued countries are unable to be properly shown in the Top/bottom country barplot, which caused users to misunderstand the graph. Hence we decided to add labels to show the actual values, which could help to indicate the value is zero.
+- Another feedback we received from the review is that many countries are missing from the map, while all the missing countries are shown in the same color in a contiguous block, which might be hard for users to understand. Hence the map would be improved to show all the country boundaries, so that users would be able to check the availability of data of a specific country more easily.
