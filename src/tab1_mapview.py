@@ -36,7 +36,6 @@ proj_param = {
     "Africa": [0, 20, 2]
 }
 
-
 # ==============================================================================
 #                            Layout for map and barchart
 # ==============================================================================
@@ -61,24 +60,7 @@ tab1_plots = dbc.Col(
                             ),
                         ]                    )
         ], style={"padding": "3vh 0"}),
-        #html.P(
-        #    "Drag and select the number of year to view the change of engergy consumption distribution using the slide bar. You can hover or zoom to get the details of a specific region.",
-        #    style={"color": "#888888"},
-        #),
-        dbc.Row([
-            html.Div("Map View:", style={"width": "fit-content", "padding": "5px 0"}),
-            dbc.Col(
-                dcc.Dropdown(
-                    id="tab1-map-focus",
-                    options=[
-                        {"label": region, "value": region}
-                        for region in proj_param
-                    ],
-                    value="World",
-                    clearable=False
-                ),
-            )], style={"width": "20%", "padding-left": "10px"}
-        ),
+        
         dcc.Graph(id="tab1-map"),
         html.Div(
             dcc.Slider(
@@ -118,10 +100,7 @@ tab1_plots = dbc.Col(
                 ),
             ]
         ),
-        #html.P(
-        #    "Select the number of countries to view in the bar plot using the input tab, then select whether to view to the top or bottom consumers. Hover the bar for details.",
-        #    style={"color": "#888888"},
-        #),
+
         html.Br(),
         dbc.Row(
             [

@@ -18,6 +18,13 @@ df_continents = df_all[df_all["Code"].isna()]
 list_of_continents = df_continents["Entity"].unique()
 list_of_countries = df_countries["Entity"].unique()
 
+proj_param = {
+    "World": [0, 0, 1],
+    "North America": [40, -120, 2],
+    "Europe": [50, 20, 4],
+    "Africa": [0, 20, 2]
+}
+
 # ==============================================================================
 #                            SideBar1
 # ==============================================================================
@@ -27,10 +34,8 @@ SIDEBAR1_STYLE = {
     "top": 0,
     "left": 0,
     "bottom": 0,
-    # "width": "18rem",
     "padding": "2rem 1rem",
     "background-image": "url(/assets/wind-energy.jpg)",
-    # "background-color": "#98FB98",
     "background-color": "rgba(255,255,255,0.6)",
     "background-blend-mode": "overlay",
 }
@@ -41,10 +46,7 @@ sidebar1 = dbc.Col(
         html.H3("World Energy Visualisation"),
         html.H4("Global Distribution", style={"color": "#686868"}),
         html.Br(),
-        html.H5(
-            "Energy type",
-            # style={"width": "50%", "display": "inline-block"},
-        ),
+        html.H5("Energy type"),
         html.P(
             "Select a energy type for visualization:",
             style={"color": "#686868", "margin": 0, "font-size": "14px"},
@@ -63,6 +65,23 @@ sidebar1 = dbc.Col(
                 "padding": "10px 10px 10px 0px",
             },
         ),
+        html.Br(),
+        html.H5("Map View"),
+        dbc.Row(
+            dcc.Dropdown(
+                id="tab1-map-focus",
+                options=[
+                        {"label": region, "value": region}
+                        for region in proj_param
+                    ],
+                    value="World",
+                    clearable=False
+            ),
+            style={
+                "padding": "10px 10px 10px 0px",
+            },
+        ),
+        
         html.Br(),
         html.H5(
             "Data sources",
