@@ -255,6 +255,7 @@ def display_map(energy_type, year, scope):
     
     fig.update_layout(
         dragmode="zoom",
+        margin={"r":0,"t":0,"l":0,"b":0}, 
         title={
             "text": "Global "
             + str(energy_type)
