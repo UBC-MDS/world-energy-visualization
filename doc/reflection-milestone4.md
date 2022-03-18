@@ -2,13 +2,24 @@
 
 ## Has it been easy to use your app?
 
-- According to the peer feedback, the dashboard is easy to use in general. We tried to make our application as straightforward as possible with short descriptions.
+- According to the peer feedback, the dashboard is easy to use in general. We tried to make our application as straightforward as possible with short descriptions of each plot.
 - To have a better user experience, we added toggle buttons for descriptions to simplify the interface while information is still accessible if needed.
 - We believe the two tabs by two categories - `Global Distribution` and `Historical Trends`- would conveniently help users locate the desired information and prevent being overwhelmed by charts and plots.
 
 ## What differences are there between the DashR and DashPy app?
 
 ## Are there reoccurring themes in your feedback on what is good and what can be improved?
+
+Positives:
+
+- Based on the peer review, one positive element of our app is the use of tabs to separate the plots displaying global information from the regional (more specific data). This has improved the user experience greatly as it reduces the number of plots they are presented with at once and allows them to focus on either a general global analysis or specific regional analysis. 
+- Another reoccuring comment was that the app had an effective use of bootstrap components to organize the plots and filtering elements to make it easy for the users to use. In particular, the peer reviewer specified that our design and use of plots were appropriate for the persona we described who the app is intended to be used by.
+
+Improvements: 
+
+- One general trend in the feedback on the improvements was to do with the representation of the data in the world map and bar plot in the first tab. 
+- In the context of the persona viewing the app, he/she needs to be explicitly made aware that a particular country is missing data. Additionally, analysis on smaller nations and regions like Europe where there are many nations will be compromised due to the lack of a zoom feature. 
+- Furthermore, if the persona were to do an analysis of countries that are the smallest consumers, there is a lack of communication when the consumption percentage is zero. 
 
 ## Is there any feedback (or other insight) that you have found particularly valuable during your dashboard development?
 
