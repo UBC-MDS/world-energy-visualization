@@ -7,9 +7,7 @@
 - We believe the two tabs by two categories - `Global Distribution` and `Historical Trends`- would conveniently help users locate the desired information and prevent being overwhelmed by charts and plots.
 
 ## What differences are there between the DashR and DashPy app?
-- We were able to replicate almost entirely functionality and visual aspects of DashR based on initial prototype of dashboard implementation in Python. Mostly it was limited only to minor changes due to syntaxes differences in R and Python, however there were significant changes in code for making proper visualisation of sidebar which changes after clicking at tabs. For Python it was done very easily, but for R dashboard we needed to apply multiple additional logical functions in order to replicate visual aspect of DashPy.
-
-- Also in DashPy we had a slick button for toggle between "on/off" for visualization of World trends, but in R implementation of the Dash there are no such option. Therefore we limited that feature to basic tickmark of dash-bootstrap-components `Checklist` attribute. 
+- We were able to replicate fully functionality and visual aspects of DashR based on initial prototype of dashboard implementation in Python. All differences in implementations are only related to syntaxes differences between R and Python, however there were significant changes in code for making proper visualisation of sidebar which changes after clicking at tabs. For Python it was done very easily, but for R dashboard we needed to apply multiple additional logical functions in order to replicate visual aspect of DashPy.
 
 - One more difference between R and Python implementations of our dashboard is in terms of overall architecture. Creating dashboard in Dash involves huge amount of brackets, so to make the code more readable, we splitted DashPy at four distinct blocks, which are much easier to read and maintain. However, for DashR we could not do this due to limitations of R versionof Dash, where is not clear how to use callbacks from separate files. 
 
