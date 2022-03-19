@@ -67,6 +67,10 @@ sidebar1 = dbc.Col(
         ),
         html.Br(),
         html.H5("Map View"),
+        html.P(
+            "Select a region for map zoom in",
+            style={"color": "#686868", "margin": 0, "font-size": "14px"},
+        ),
         dbc.Row(
             dcc.Dropdown(
                 id="tab1-map-focus",
