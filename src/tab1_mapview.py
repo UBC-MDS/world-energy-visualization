@@ -33,7 +33,7 @@ proj_param = {
     "World": [0, 0, 1],
     "North America": [40, -120, 2],
     "Europe": [50, 20, 4],
-    "Africa": [0, 20, 2]
+    "Africa": [0, 20, 2],
 }
 
 # ==============================================================================
@@ -42,25 +42,28 @@ proj_param = {
 
 tab1_plots = dbc.Col(
     [
-        dbc.Row([
-            html.H4("World Consumption by Country", style={"width": "fit-content"}),
-            dbc.Col(
-                        [
-                            dbc.Button(
-                                id="map_tooltip",
-                                color="secondary",
-                                children="?",
-                                size="sm",
-                                outline=True,
-                            ),
-                            dbc.Tooltip(
-                                "Drag and select the number of year to view the change of engergy consumption distribution using the slide bar. You can hover or zoom to get the details of a specific region.",
-                                target="map_tooltip",
-                                placement="bottom",
-                            ),
-                        ]                    )
-        ], style={"padding": "3vh 0"}),
-        
+        dbc.Row(
+            [
+                html.H4("World Consumption by Country", style={"width": "fit-content"}),
+                dbc.Col(
+                    [
+                        dbc.Button(
+                            id="map_tooltip",
+                            color="secondary",
+                            children="?",
+                            size="sm",
+                            outline=True,
+                        ),
+                        dbc.Tooltip(
+                            "Drag and select the number of year to view the change of engergy consumption distribution using the slide bar. You can hover or zoom to get the details of a specific region.",
+                            target="map_tooltip",
+                            placement="bottom",
+                        ),
+                    ]
+                ),
+            ],
+            style={"padding": "3vh 0"},
+        ),
         dcc.Graph(id="tab1-map"),
         html.Div(
             dcc.Slider(
@@ -69,16 +72,20 @@ tab1_plots = dbc.Col(
                 max=list_yrs.max(),
                 step=1,
                 value=list_yrs.max(),
-                marks={int(i): str(i) for i in np.append(list_yrs[::5], [list_yrs.max()])},
+                marks={
+                    int(i): str(i) for i in np.append(list_yrs[::5], [list_yrs.max()])
+                },
                 tooltip={"placement": "top", "always_visible": True},
-                updatemode="drag"
+                updatemode="drag",
             ),
-            style={"padding": "0vh 10vw"}
+            style={"padding": "0vh 10vw"},
         ),
         html.Br(),
         dbc.Row(
             [
-                html.H4("Top/Bottom energy consumer nations", style={"width": "fit-content"}),
+                html.H4(
+                    "Top/Bottom energy consumer nations", style={"width": "fit-content"}
+                ),
                 dbc.Col(
                     [
                         dbc.Button(
@@ -96,11 +103,10 @@ tab1_plots = dbc.Col(
                             placement="bottom",
                         ),
                     ],
-                    style={"padding": "0px 700px 0px 0px"},
+                    style={"padding": "0 0"},
                 ),
             ]
         ),
-
         html.Br(),
         dbc.Row(
             [
@@ -108,10 +114,10 @@ tab1_plots = dbc.Col(
                     [
                         dbc.Row(
                             [
-                                    html.H4(
-                                        "Number of countries",
-                                        style={"font-size": "20px", "width": "fit-content"},
-                                    ),
+                                html.H4(
+                                    "Number of countries",
+                                    style={"font-size": "20px", "width": "fit-content"},
+                                ),
                                 dbc.Col(
                                     [
                                         dbc.Button(
@@ -127,7 +133,7 @@ tab1_plots = dbc.Col(
                                             placement="bottom",
                                         ),
                                     ],
-                                    style={"padding": "0px 350px 0px 0px"},
+                                    style={"padding": "0 0"},
                                 ),
                             ]
                         ),
@@ -167,7 +173,7 @@ tab1_plots = dbc.Col(
                                             placement="bottom",
                                         ),
                                     ],
-                                    style={"padding": "0px 480px 0px 0px"},
+                                    style={"padding": "0 0"},
                                 ),
                             ]
                         ),
@@ -186,7 +192,7 @@ tab1_plots = dbc.Col(
                         ),
                     ],
                     style={
-                        "padding": "0px 0px 0px 50px",
+                        "padding": "0 0",
                     },
                 ),
             ]
@@ -206,15 +212,15 @@ tab1_plots = dbc.Col(
     Output("tab1-map", "figure"),
     Input("tab1-energy-type-dropdown", "value"),
     Input("tab1-year-slider", "value"),
-    Input("tab1-map-focus", "value")
+    Input("tab1-map-focus", "value"),
 )
 def display_map(energy_type, year, scope):
     """
     Docs
     """
-    #scope = "Africa"
+    # scope = "Africa"
     df = df_notna.query("Year==@year & energy_type==@energy_type")
-    
+
     fig = px.choropleth(
         df,
         locations="Code",
@@ -231,10 +237,10 @@ def display_map(energy_type, year, scope):
         color_continuous_scale=px.colors.sequential.YlGn,
         range_color=[0, 100],
     )
-    
+
     fig.update_layout(
         dragmode="zoom",
-        margin={"r":0,"t":0,"l":0,"b":0}, 
+        margin={"r": 0, "t": 0, "l": 0, "b": 0},
         title={
             "text": "Global "
             + str(energy_type)
@@ -242,13 +248,13 @@ def display_map(energy_type, year, scope):
             + str(year),
             "x": 0.5,
             "xanchor": "center",
-        }, 
+        },
     )
 
     fig.update_geos(
         showcountries=True,
         center={"lat": proj_param[scope][0], "lon": proj_param[scope][1]},
-        projection={"scale": proj_param[scope][2]}
+        projection={"scale": proj_param[scope][2]},
     )
 
     return fig
